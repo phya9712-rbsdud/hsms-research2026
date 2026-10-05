@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>행신중 연구학교 아카이브</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+/* 학교 아카이브: 상단 메뉴 → 섹션 배너 → 카드 → 폴더 → 자료(미리보기). 리플렛 G·R·O·W 색을 그대로 사용 */
+:root{
+  --navy:#1B3A8C; --navy-d:#12285F; --ink:#1A1F2E; --muted:#5A6378; --line:#E3E7F0;
+  --bg:#F5F7FB; --surface:#FFFFFF; --soft-navy:#C9D3EE;
+  --G:#4F6E14; --R:#176FA8; --O:#B85F00; --W:#7A2460;
+  --font:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+[hidden]{display:none!important}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);font-size:15px;line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+a{color:var(--navy)}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+
+/* header */
+.hd{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.hd .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 20px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;padding:4px 0;cursor:pointer}
+.mark{display:grid;grid-template-columns:repeat(2,13px);gap:3px}
+.mark i{width:13px;height:13px;border-radius:3px;display:block}
+.brand b{font-size:17px;color:var(--navy);font-weight:900}
+.nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.nav::-webkit-scrollbar{display:none}
+.nav button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 10px 8px;font-size:15px;white-space:nowrap;cursor:pointer;color:var(--ink)}
+.nav button:hover{color:var(--navy)}
+.nav button[aria-current="page"]{font-weight:700;color:var(--c,var(--navy));border-bottom-color:var(--c,var(--navy))}
+
+.demo{background:#FFF6D9;color:#6B5200;font-size:13px;text-align:center;padding:7px 16px}
+
+main{min-height:60vh}
+section.blk{padding-block:56px}
+section.blk.white{background:var(--surface)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:1px;color:var(--R)}
+h1,h2,h3{text-wrap:balance}
+h2{margin:4px 0 6px;font-size:28px;line-height:1.35}
+.lead{color:var(--muted);margin:0}
+.row{display:flex;flex-wrap:wrap;gap:16px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--navy);color:#fff;padding:76px 0 84px;text-align:center}
+.ring{position:absolute;border-radius:50%;background:conic-gradient(var(--G) 0 25%,var(--R) 0 50%,var(--O) 0 75%,var(--W) 0);opacity:.32}
+.ring::after{content:"";position:absolute;inset:22%;border-radius:50%;background:var(--navy)}
+.hero .y{position:relative;font-size:16px;color:var(--soft-navy);letter-spacing:1px}
+.hero h1{position:relative;margin:14px 0 24px;font-size:44px;font-weight:900;line-height:1.32}
+.hero h1 b{color:#FFE27A}
+.slogan{position:relative;display:inline-block;background:#fff;color:var(--navy);border-radius:12px;padding:15px 28px;font-size:22px;font-weight:700}
+.hero .sub{position:relative;margin-top:16px;color:#DCE3F5}
+
+/* overview */
+.ov{flex:1 1 220px;background:var(--bg);border-radius:14px;padding:20px}
+.ov.wide{flex:2 1 380px}
+.ov .k{font-size:13px;color:var(--muted)}
+.ov .v{font-size:18px;font-weight:700;margin-top:4px;line-height:1.5}
+.org{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:30px}
+.org .top{background:var(--navy);color:#fff;font-weight:700;padding:10px 26px;border-radius:8px}
+.org .row{justify-content:center;gap:10px}
+.org .d{border:2px solid var(--navy);color:var(--navy);border-radius:8px;padding:8px 16px;font-weight:500;background:#fff}
+
+/* grow */
+.grow{flex:1 1 220px;color:#fff;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:6px}
+.grow .L{font-size:52px;font-weight:900;line-height:1}
+.grow .w{font-size:14px;font-weight:700;opacity:.88}
+.grow .t{font-size:18px;font-weight:700;line-height:1.45;margin-top:4px}
+.grow .d{font-size:13.5px;opacity:.9}
+
+/* voice */
+.voice{flex:1 1 320px;background:var(--surface);border-radius:14px;padding:24px;border:1px solid var(--line)}
+.voice p{margin:0;font-size:16.5px;line-height:1.8}
+.voice .who{margin-top:12px;font-size:14px;font-weight:700;color:var(--muted)}
+
+/* section banner */
+.bn{position:relative;overflow:hidden;background:var(--c);color:#fff;padding:52px 0 56px}
+.bn .c1{position:absolute;right:-120px;top:-160px;width:460px;height:460px;border-radius:50%;border:2px solid #fff;opacity:.16}
+.bn .c2{position:absolute;right:160px;bottom:-220px;width:380px;height:380px;border-radius:50%;background:#fff;opacity:.07}
+.bn .wrap{position:relative;display:flex;flex-direction:column;gap:10px}
+.bn .tag{align-self:flex-start;font-size:13px;font-weight:700;background:rgba(255,255,255,.18);border-radius:999px;padding:5px 14px}
+.bn h1{margin:0;font-size:38px;font-weight:900;line-height:1.3}
+.bn p{margin:0;font-size:17px;opacity:.92;max-width:60ch}
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px}
+.crumb button{background:none;border:0;padding:2px 0;color:#fff;opacity:.82;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.crumb button:hover{opacity:1}
+.crumb span{opacity:.6}
+
+/* item cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{position:relative;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:border-color .15s,transform .15s,box-shadow .15s;min-width:0}
+.card:hover{border-color:var(--c);transform:translateY(-2px);box-shadow:0 8px 22px rgba(27,58,140,.08)}
+.card .no{font-size:13px;font-weight:900;color:var(--c);font-variant-numeric:tabular-nums}
+.card .t{font-size:19px;font-weight:700;line-height:1.4}
+.card .d{font-size:14px;color:var(--muted)}
+.card .meta{margin-top:auto;padding-top:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13.5px}
+.pill{background:var(--cs);color:var(--c);font-weight:700;border-radius:999px;padding:3px 11px;font-variant-numeric:tabular-nums}
+.go{color:var(--c);font-weight:700;white-space:nowrap}
+.card.big{padding:0;overflow:hidden}
+.card.big .top{background:var(--c);color:#fff;padding:22px 22px 18px;display:flex;flex-direction:column;gap:4px}
+.card.big .top .no{color:#fff;opacity:.85}
+.card.big .body{padding:16px 22px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--cs);color:var(--c);border-radius:6px;padding:2px 9px;font-size:13px;font-weight:500}
+
+/* folder cards */
+.folder{text-align:left;cursor:pointer;border:0;padding:0;border-radius:16px;overflow:hidden;background:var(--surface);box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s;min-width:0}
+.folder:hover{transform:translateY(-2px);box-shadow:0 0 0 2px var(--c),0 10px 24px rgba(27,58,140,.08)}
+.folder .band{position:relative;overflow:hidden;background:var(--c);color:#fff;padding:26px 22px 22px;min-height:132px;display:flex;flex-direction:column;justify-content:flex-end}
+.folder .band svg{position:absolute;right:16px;top:16px;opacity:.5}
+.folder .band::after{content:"";position:absolute;right:-60px;bottom:-80px;width:200px;height:200px;border-radius:50%;background:#fff;opacity:.08}
+.folder .gr{font-size:15px;font-weight:700;opacity:.88}
+.folder .sj{font-size:25px;font-weight:900;line-height:1.25}
+.folder .ft{padding:14px 22px;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+
+/* files */
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.bar h2{font-size:22px;margin:0}
+.cnt{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.doc{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;padding:0;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s;min-width:0}
+.doc:hover{border-color:var(--c);box-shadow:0 8px 20px rgba(27,58,140,.08)}
+.thumb{aspect-ratio:4/3;background:var(--cs);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;max-width:100%}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.thumb .ic{color:var(--c);opacity:.7}
+.thumb.vt{aspect-ratio:16/9;background:#1A1F2E}
+.thumb.vt img{object-position:center}
+.thumb.vt .ic{position:relative;z-index:1;color:#fff;opacity:.95;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.doc:hover .thumb.vt .ic{transform:scale(1.08);transition:transform .15s}
+.badge{position:absolute;left:10px;top:10px;background:var(--c);color:#fff;font-size:11.5px;font-weight:700;border-radius:5px;padding:2px 7px;letter-spacing:.5px}
+.doc .nm{padding:12px 14px 4px;font-weight:700;font-size:14.5px;line-height:1.45;overflow-wrap:anywhere}
+.doc .dt{padding:0 14px 12px;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.ph{position:relative;aspect-ratio:1;border:0;padding:0;border-radius:12px;overflow:hidden;cursor:pointer;background:var(--cs);display:flex;align-items:center;justify-content:center;max-width:100%}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
+.ph:hover img{transform:scale(1.04)}
+.empty{background:var(--surface);border:2px dashed var(--line);border-radius:16px;padding:40px 24px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
+.empty code{display:inline-block;margin-top:10px;background:var(--bg);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--ink);overflow-wrap:anywhere}
+.sk{background:linear-gradient(90deg,#EDF0F6 0%,#F6F8FB 50%,#EDF0F6 100%);background-size:200% 100%;animation:sk 1.2s infinite linear;border-radius:14px}
+@keyframes sk{to{background-position:-200% 0}}
+.err{background:#FDECEC;color:#8A1F1F;border-radius:12px;padding:16px 18px}
+
+/* viewer */
+.vw{position:fixed;inset:0;z-index:50;background:rgba(10,16,32,.86);display:flex;flex-direction:column}
+.vw .vh{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#fff}
+.vw .vh .nm{flex:1;min-width:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vw .vh .ix{font-size:13px;opacity:.75;font-variant-numeric:tabular-nums}
+.ib{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:10px;min-width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 12px;cursor:pointer;text-decoration:none;font-size:14px}
+.ib:hover{background:rgba(255,255,255,.22)}
+.ib[disabled]{opacity:.3;cursor:default}
+.vw .vb{flex:1;min-height:0;display:flex;align-items:center;gap:8px;padding:0 10px 12px}
+.vw .stage{flex:1;min-width:0;height:100%;display:flex;align-items:center;justify-content:center}
+.vw iframe{width:100%;height:100%;border:0;border-radius:10px;background:#fff}
+.vw img{max-width:100%;max-height:100%;border-radius:8px;object-fit:contain}
+.mock{width:min(720px,100%);height:100%;background:#fff;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);padding:24px;text-align:center}
+@media (max-width:640px){
+  .hero{padding:52px 0 60px}.hero h1{font-size:27px}.slogan{font-size:16px;padding:12px 16px}
+  .bn{padding:38px 0 42px}.bn h1{font-size:27px}.bn p{font-size:15px}
+  h2{font-size:23px} section.blk{padding-block:40px}
+  .vw .side{display:none}
+}
+
+/* footer */
+.fo{background:var(--navy-d);color:var(--soft-navy);margin-top:0;padding-block:36px 26px;font-size:14px}
+.fo .top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
+.fo .nm{color:#fff;font-weight:900;font-size:19px}
+.fo .mk{display:flex;gap:6px;margin-top:14px}
+.fo .mk span{width:30px;height:30px;border-radius:7px;color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+.fo nav{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.fo nav button{background:none;border:0;padding:2px 0;color:var(--soft-navy);cursor:pointer;text-align:left}
+.fo nav button:hover{color:#fff;text-decoration:underline}
+.fo .ct{line-height:1.9}.fo .ct b{color:#fff;font-weight:500;margin-right:6px}
+.fo .bt{margin-top:24px;padding-top:14px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12.5px;color:#9FB0DA}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="wrap">
+    <button class="brand" data-go="home" aria-label="홈으로">
+      <span class="mark" aria-hidden="true"><i style="background:var(--G)"></i><i style="background:var(--R)"></i><i style="background:var(--O)"></i><i style="background:var(--W)"></i></span>
+      <b>행신중 연구학교 아카이브</b>
+    </button>
+    <nav class="nav" id="nav" aria-label="주 메뉴"></nav>
+  </div>
+</header>
+<div id="demo" class="demo" hidden>미리보기 화면입니다. 자료 이름과 개수는 예시이고, 실제 웹앱에서는 드라이브 폴더의 PDF, 사진, 영상이 그대로 보입니다.</div>
+<main id="app"></main>
+<footer class="fo">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="nm">행신중학교</div>
+        <div>더불어 배우고 미래를 꿈꾸는 행신중학교</div>
+        <div class="mk" aria-label="G·R·O·W"><span style="background:var(--G)">G</span><span style="background:var(--R)">R</span><span style="background:var(--O)">O</span><span style="background:var(--W)">W</span></div>
+      </div>
+      <nav id="fnav" aria-label="바닥글 메뉴"></nav>
+      <div class="ct">
+        <div><b>주소</b>경기도 고양시 덕양구 화신로 22</div>
+        <div><b>교무실</b>031-970-2334</div>
+        <div><b>연구학교</b>2026. 3. 1. ~ 2028. 2. 28.</div>
+      </div>
+    </div>
+    <div class="bt"><span>경기도교육청 지정 AI기반 서·논술형 평가 연구학교</span><span>© 2026 행신중학교</span></div>
+  </div>
+</footer>
+<div id="viewer" class="vw" hidden role="dialog" aria-modal="true" aria-label="자료 미리보기"></div>
+
+<script>
+/* 오류가 나면 흰 화면 대신 원인을 보여 줌 */
+window.addEventListener('error', function (e) {
+  var app = document.getElementById('app');
+  if (app && !app.innerHTML.trim()) app.innerHTML = '<div style="max-width:720px;margin:48px auto;padding:20px 22px;background:#FDECEC;color:#8A1F1F;border-radius:12px;line-height:1.7">화면을 그리는 중 오류가 났어요.<br><small>' + String(e.message).replace(/[<>&]/g, '') + '</small></div>';
+});
+</script>
+<script>
+const CONFIG = {"sections": [{"id": "home", "title": "홈", "nav": "홈"}, {"id": "onboarding", "title": "3-STEP 온보딩 활동", "nav": "3-STEP 온보딩 활동", "color": "#B85F00", "soft": "#FFF3E4", "tag": "O 피드백 · W 글쓰기", "lead": "서·논술형 평가를 준비하는 사전 온보딩부터 사후 글쓰기로 확인한 학생의 변화까지", "items": [{"id": "ai-literacy", "title": "AI 리터러시 교육", "desc": "AI 윤리 9대 원칙 실천 서약과 AI 도구를 바르게 쓰는 법", "folder": "1. AI 리터러시 교육"}, {"id": "pre-writing", "title": "사전 글쓰기 활동", "desc": "평가 전 학생의 글쓰기 출발점 진단", "folder": "2. 사전 글쓰기 활동"}, {"id": "directives", "title": "반응 지시어 교육", "desc": "서·논술형 문항의 의도를 읽는 반응 지시어 학습", "folder": "3. 반응 지시어 교육"}, {"id": "post-writing", "title": "사후 글쓰기 활동", "desc": "같은 기준으로 다시 쓴 글로 성장 확인", "folder": "4. 사후 글쓰기 활동"}], "folder": "1. 3-STEP 온보딩 활동"}, {"id": "special", "title": "연구학교 특색활동", "nav": "연구학교 특색활동", "color": "#176FA8", "soft": "#E3EFF8", "tag": "R 추론 · G 융합", "lead": "교과의 벽을 넘는 융합 평가와 교과 심화 평가, 수업 속 성장 글쓰기", "items": [{"id": "one-source", "title": "1문항 다교과 융합 수행평가", "color": "#176FA8", "soft": "#E3EFF8", "desc": "하나의 공통 과제를 두 교과 이상이 각 교과 성취기준으로 분담 평가", "subs": [{"id": "f1", "title": "1학년 사회·과학", "folder": "1학년 사회·과학"}, {"id": "f2", "title": "1학년 정보·음악", "folder": "1학년 정보·음악"}, {"id": "f3", "title": "3학년 사회·과학", "folder": "3학년 사회·과학"}, {"id": "f4", "title": "1학년 국어·기술", "folder": "1학년 국어·기술"}, {"id": "f5", "title": "2학년 수학·기술", "folder": "2학년 수학·기술"}, {"id": "f6", "title": "1학년 사회·도덕", "folder": "1학년 사회·도덕"}], "folder": "1. 1문항 다교과 융합 수행평가"}, {"id": "fusion-project", "title": "융합 프로젝트형 수행평가", "color": "#4F6E14", "soft": "#EDF3E0", "desc": "교과의 경계를 넘어 실생활 문제를 탐구하는 프로젝트", "subs": [{"id": "f1", "title": "3학년 사회·과학", "folder": "3학년 사회·과학"}], "folder": "2. 융합 프로젝트형 수행평가"}, {"id": "deep-project", "title": "교과심화형 프로젝트 수행평가", "color": "#0F6B66", "soft": "#E0F0EE", "desc": "한 교과의 본질에 깊이 들어가는 심화 프로젝트", "subs": [{"id": "f1", "title": "1학년 음악", "folder": "1학년 음악"}, {"id": "f2", "title": "3학년 과학", "folder": "3학년 과학"}], "folder": "3. 교과심화형 프로젝트 수행평가"}, {"id": "growth-writing", "title": "교과별 성장글쓰기", "color": "#7A2460", "soft": "#F5E4EE", "desc": "수업 중 글쓰기 → 피드백 → 다시 쓰기", "subs": [{"id": "f1", "title": "1학년 사회", "folder": "1학년 사회"}, {"id": "f2", "title": "3학년 사회", "folder": "3학년 사회"}, {"id": "f3", "title": "3학년 과학", "folder": "3학년 과학"}], "folder": "4. 교과별 성장글쓰기"}], "folder": "2. 연구학교 특색활동"}, {"id": "research", "title": "연구활동", "nav": "연구활동", "color": "#4F6E14", "soft": "#EDF3E0", "tag": "G 융합", "lead": "교사가 함께 배우고 수업을 열어 나눈 연구학교의 기록", "items": [{"id": "teacher-pd", "title": "교원 역량 강화", "desc": "전 교원 PLC, 전문가 특강, 평가 연수", "folder": "1. 교원 역량 강화"}, {"id": "open-class", "title": "수업공개의 날", "desc": "서·논술형 평가 수업 공개와 수업 나눔 협의회", "folder": "2. 수업공개의 날"}, {"id": "conference", "title": "컨퍼런스 참여", "desc": "연구 성과 공유와 외부 컨퍼런스 참여", "folder": "3. 컨퍼런스 참여"}], "folder": "3. 연구활동"}, {"id": "reports", "title": "관련 보고서", "nav": "관련 보고서", "color": "#3E4C8A", "soft": "#E7EAF5", "tag": "연구 결과", "lead": "데이터로 확인한 학생의 글쓰기 성장과 평가의 변화", "items": [{"id": "pre-post", "title": "사전·사후 글쓰기 비교", "desc": "같은 기준으로 진단한 사전·사후 글쓰기 분석", "folder": "1. 사전·사후 글쓰기 비교"}, {"id": "subject-eval", "title": "교과별 평가 보고서 분석", "desc": "교과별 서·논술형 평가 운영 결과 분석", "folder": "2. 교과별 평가 보고서 분석"}, {"id": "feedback-effect", "title": "피드백이 미치는 영향", "desc": "AI·교사 피드백이 다시 쓰기에 준 변화", "folder": "3. 피드백이 미치는 영향"}], "folder": "4. 관련 보고서"}], "school": "행신중학교"};
+const START = '';
+const DEMO = null;
+const API_URL = "https://script.google.com/macros/s/AKfycbyW9zvO-PdkSJ0ev98sRUkQfTe2B-oNPfGK8tz0zWpmJX4gi4H2y0sXmyWsMHXovkuqNg/exec";
+const IS_GAS = typeof google !== 'undefined' && google.script && google.script.run;
+const LIVE = !!(IS_GAS || API_URL);
+
+const $app = document.getElementById('app');
+const $viewer = document.getElementById('viewer');
+const SECTIONS = CONFIG.sections;
+const sec = id => SECTIONS.find(s => s.id === id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let state = { s: 'home' };
+let viewerList = [], viewerIx = 0, lastFocus = null;
+
+/* icons */
+const IC = {
+  doc: '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>',
+  img: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>',
+  folder: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  prev: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>',
+  next: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>',
+  play: '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z" fill="currentColor"/></svg>',
+  ext: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'
+};
+
+/* server calls */
+function api(fn, ...args) {
+  return new Promise((res, rej) => {
+    if (!IS_GAS && API_URL) {
+      const q = new URLSearchParams({ api: fn });
+      if (fn === 'getCounts') q.set('s', args[0]);
+      if (fn === 'getFiles') { q.set('s', args[0]); q.set('i', args[1]); if (args[2]) q.set('u', args[2]); }
+      fetch(API_URL + '?' + q.toString(), { redirect: 'follow' })
+        .then(r => { if (!r.ok) throw new Error('서버 응답 ' + r.status); return r.json(); })
+        .then(j => { if (!j || !j.ok) throw new Error((j && j.error) || '자료를 불러오지 못했어요.'); res(j.data); })
+        .catch(rej);
+      return;
+    }
+    if (!IS_GAS) { setTimeout(() => { try { if (!DEMO) throw new Error('웹 앱 주소(…/exec)로 열어야 드라이브 자료를 불러올 수 있어요.'); res(DEMO[fn](...args)); } catch (e) { rej(e); } }, 350); return; }
+    google.script.run.withSuccessHandler(res).withFailureHandler(rej)[fn](...args);
+  });
+}
+const cache = {};
+function load(key, fn, ...args) { if (!cache[key]) cache[key] = api(fn, ...args).catch(e => { delete cache[key]; throw e; }); return cache[key]; }
+
+/* file helpers */
+function kind(m) {
+  if (m === 'application/pdf') return 'pdf';
+  if (m.indexOf('image/') === 0) return 'image';
+  if (m.indexOf('video/') === 0) return 'video';
+  if (m.indexOf('presentation') > -1) return 'slides';
+  if (m.indexOf('document') > -1 || m.indexOf('word') > -1) return 'doc';
+  if (m.indexOf('spreadsheet') > -1 || m.indexOf('excel') > -1) return 'sheet';
+  return 'file';
+}
+const KLABEL = { pdf: 'PDF', image: '사진', video: '영상', slides: '슬라이드', doc: '문서', sheet: '시트', file: '파일' };
+function previewUrl(f) {
+  if (f.mime === 'application/vnd.google-apps.document') return 'https://docs.google.com/document/d/' + f.id + '/preview';
+  if (f.mime === 'application/vnd.google-apps.presentation') return 'https://docs.google.com/presentation/d/' + f.id + '/preview';
+  if (f.mime === 'application/vnd.google-apps.spreadsheet') return 'https://docs.google.com/spreadsheets/d/' + f.id + '/preview';
+  return 'https://drive.google.com/file/d/' + f.id + '/preview';
+}
+const thumbUrl = (f, w) => LIVE ? 'https://drive.google.com/thumbnail?id=' + f.id + '&sz=w' + w : '';
+const ymd = t => { const d = new Date(t); return d.getFullYear() + '. ' + (d.getMonth() + 1) + '. ' + d.getDate() + '.'; };
+const stripExt = n => n.replace(/\.[a-z0-9]{2,5}$/i, '');
+
+/* navigation */
+function keyOf(st) { return [st.s, st.i, st.u].filter(Boolean).join('/'); }
+function parse(key) {
+  const [s, i, u] = String(key || '').split('/');
+  const S = sec(s); if (!S || !S.items) return { s: 'home' };
+  const I = i && S.items.find(x => x.id === i); if (!I) return { s };
+  const U = u && (I.subs || []).find(x => x.id === u);
+  return U ? { s, i, u } : { s, i };
+}
+function go(st, push) {
+  state = parse(keyOf(st));
+  closeViewer(true);
+  render();
+  window.scrollTo(0, 0);
+  if (push === false) return;
+  if (IS_GAS && google.script.history) google.script.history.push(state, { page: keyOf(state) || 'home' });
+  else { try { const k = keyOf(state); history.pushState(state, '', API_URL ? (k ? '?page=' + k : location.pathname) : undefined); } catch (e) {} }
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-go]');
+  if (!b) return;
+  e.preventDefault();
+  go(parse(b.dataset.go));
+});
+
+function renderNav() {
+  const cur = state.s || 'home';
+  const S = sec(cur);
+  document.getElementById('nav').innerHTML = SECTIONS.map(s =>
+    `<button data-go="${s.id}" ${s.id === cur ? 'aria-current="page"' : ''} style="--c:${s.color || 'var(--navy)'}">${esc(s.nav)}</button>`).join('');
+  document.getElementById('fnav').innerHTML = SECTIONS.map(s => `<button data-go="${s.id}">${esc(s.nav)}</button>`).join('');
+}
+
+function render() {
+  renderNav();
+  const S = sec(state.s);
+  if (!S || !S.items) return renderHome();
+  const I = state.i && S.items.find(x => x.id === state.i);
+  if (!I) return renderSection(S);
+  if (I.subs && !state.u) return renderItem(S, I);
+  return renderFiles(S, I, state.u && I.subs.find(x => x.id === state.u));
+}
+
+/* ---------- 홈 ---------- */
+function renderHome() {
+  document.title = '행신중 연구학교 아카이브';
+  $app.innerHTML = `
+  <section class="hero">
+    <div class="ring" style="width:420px;height:420px;right:-130px;top:-150px"></div>
+    <div class="ring" style="width:260px;height:260px;left:-110px;bottom:-140px;opacity:.18"></div>
+    <div class="wrap">
+      <div class="y">2026학년도 행신중학교 연구학교</div>
+      <h1><b>AI-G·R·O·W 프로젝트</b>를 통한<br>서·논술형 평가 일반화 모델 개발</h1>
+      <div class="slogan">AI는 피드백을 돕고, 교사는 성장을 평가합니다.</div>
+      <div class="sub">단편적 암기에서 심층 추론으로, 일회성 채점에서 지속적 성장으로</div>
+    </div>
+  </section>
+
+  <section class="blk white"><div class="wrap">
+    <div class="eyebrow">OVERVIEW</div><h2>연구학교 운영 개요</h2>
+    <div class="row" style="margin-top:16px">
+      <div class="ov"><div class="k">운영 기간</div><div class="v">2026. 3. 1. ~ 2028. 2. 28. (2년간)</div></div>
+      <div class="ov"><div class="k">지정 기관</div><div class="v">경기도교육청 지정 연구학교</div></div>
+      <div class="ov wide"><div class="k">연구 주제</div><div class="v">AI-G·R·O·W 프로젝트를 통한 학습성장 중심 서·논술형 평가 일반화 모델 개발</div></div>
+    </div>
+    <div class="org">
+      <div class="top">행신중학교 연구 조직</div>
+      <div class="row"><div class="d">교육과정설계분과</div><div class="d">AI평가개발분과</div><div class="d">데이터기반성장지원분과</div><div class="d">성과확산분과</div></div>
+    </div>
+  </div></section>
+
+  <section class="blk"><div class="wrap">
+    <div class="eyebrow">4 KEY TASKS</div><h2>G·R·O·W 4대 과제로 본 연구 운영</h2>
+    <p class="lead">융합 → 추론 → 피드백 → 글쓰기 성장으로 이어지는 학습성장 중심 서·논술형 평가의 전 과정</p>
+    <div class="row" style="margin-top:20px">
+      <div class="grow" style="background:var(--G)"><div class="L">G</div><div class="w">융합</div><div class="t">교육과정 기반 조성 및 교원 역량 강화</div><div class="d">전 교원 PLC 체계화 · 전문가 특강 · 융합 교육과정 맵핑</div></div>
+      <div class="grow" style="background:var(--R)"><div class="L">R</div><div class="w">추론</div><div class="t">1문항 다교과 평가 모델 개발</div><div class="d">교과 간 벽 깨기를 통한 실생활 융합 과제로 논리적 추론력 평가</div></div>
+      <div class="grow" style="background:var(--O)"><div class="L">O</div><div class="w">피드백</div><div class="t">즉각적 피드백 및 데이터 소통 체계 확립</div><div class="d">AI 분석과 교사의 질적 피드백을 결합한 맞춤형 비계 제공</div></div>
+      <div class="grow" style="background:var(--W)"><div class="L">W</div><div class="w">글쓰기</div><div class="t">글쓰기 성장 모델 일반화 및 성과 확산</div><div class="d">과정 중심 글쓰기 이력 아카이빙으로 학생의 성장 증명</div></div>
+    </div>
+  </div></section>
+
+  <section class="blk white"><div class="wrap">
+    <h2>학생들의 목소리</h2>
+    <div class="row" style="margin-top:16px">
+      <div class="voice"><p>“처음엔 한 문장을 쓰는 것도 막막했는데, 고쳐 쓸 때마다 제 글이 점점 논리적으로 변하는 게 보여서 자신감이 생겼어요.”</p><div class="who">— 1학년 학생</div></div>
+      <div class="voice"><p>“AI 피드백을 받고 다시 써보니, 제가 미처 생각하지 못했던 부분이 보였고, 무엇을 말하고 싶었는지 제 생각도 분명해졌어요.”</p><div class="who">— 3학년 학생</div></div>
+    </div>
+  </div></section>`;
+}
+
+/* ---------- 공통 배너 ---------- */
+function banner(S, I, U) {
+  const c = (I && I.color) || S.color;
+  const crumbs = [`<button data-go="home">홈</button>`];
+  if (I) crumbs.push(`<span>›</span><button data-go="${S.id}">${esc(S.title)}</button>`);
+  if (U) crumbs.push(`<span>›</span><button data-go="${S.id}/${I.id}">${esc(I.title)}</button>`);
+  const title = U ? U.title : I ? I.title : S.title;
+  const lead = U ? I.title : I ? I.desc : S.lead;
+  const tag = U ? S.title : I ? S.title : S.tag;
+  return `<section class="bn" style="--c:${c}"><div class="c1"></div><div class="c2"></div>
+    <div class="wrap"><nav class="crumb" aria-label="현재 위치">${crumbs.join('')}</nav>
+    <span class="tag">${esc(tag)}</span><h1>${esc(title)}</h1><p>${esc(lead)}</p></div></section>`;
+}
+function setColors(c, cs) { $app.style.setProperty('--c', c); $app.style.setProperty('--cs', cs); }
+function fillCounts(S) {
+  load('counts:' + S.id, 'getCounts', S.id).then(c => {
+    $app.querySelectorAll('[data-count]').forEach(el => {
+      const n = c[el.dataset.count];
+      el.textContent = n == null ? '' : (el.dataset.unit === 'folder' ? `자료 ${n}개` : `자료 ${n}개`);
+    });
+  }).catch(() => $app.querySelectorAll('[data-count]').forEach(el => el.textContent = ''));
+}
+
+/* ---------- 섹션 ---------- */
+function renderSection(S) {
+  document.title = S.title + ' · 행신중 연구학교';
+  setColors(S.color, S.soft);
+  const cards = S.items.map((it, n) => {
+    const c = it.color || S.color, cs = it.soft || S.soft;
+    if (it.subs) {
+      return `<button class="card big" data-go="${S.id}/${it.id}" style="--c:${c};--cs:${cs}">
+        <div class="top"><span class="no">${n + 1}</span><span class="t">${esc(it.title)}</span></div>
+        <div class="body"><span class="d">${esc(it.desc)}</span>
+        <span class="chips">${it.subs.map(u => `<span class="chip">${esc(u.title)}</span>`).join('')}</span>
+        <span class="meta"><span class="pill" data-count="${it.id}">…</span><span class="go">폴더 ${it.subs.length}개 보기 →</span></span></div></button>`;
+    }
+    return `<button class="card" data-go="${S.id}/${it.id}" style="--c:${c};--cs:${cs}">
+      <span class="no">${n + 1}</span><span class="t">${esc(it.title)}</span><span class="d">${esc(it.desc)}</span>
+      <span class="meta"><span class="pill" data-count="${it.id}">…</span><span class="go">자료 보기 →</span></span></button>`;
+  }).join('');
+  $app.innerHTML = banner(S) + `<section class="blk"><div class="wrap"><div class="grid">${cards}</div></div></section>`;
+  fillCounts(S);
+}
+
+/* ---------- 하위 폴더 ---------- */
+function splitTitle(t) { const m = t.match(/^(\d학년)\s*(.*)$/); return m ? [m[1], m[2]] : ['', t]; }
+function renderItem(S, I) {
+  document.title = I.title + ' · 행신중 연구학교';
+  setColors(I.color || S.color, I.soft || S.soft);
+  const cards = I.subs.map(u => {
+    const [gr, sj] = splitTitle(u.title);
+    return `<button class="folder" data-go="${S.id}/${I.id}/${u.id}">
+      <span class="band">${IC.folder}<span class="gr">${esc(gr)}</span><span class="sj">${esc(sj)}</span></span>
+      <span class="ft"><span class="pill" data-count="${I.id}/${u.id}">…</span><span class="go">열기 →</span></span></button>`;
+  }).join('');
+  $app.innerHTML = banner(S, I) + `<section class="blk"><div class="wrap"><div class="grid">${cards}</div></div></section>`;
+  fillCounts(S);
+}
+
+/* ---------- 자료 ---------- */
+function renderFiles(S, I, U) {
+  document.title = (U ? U.title + ' · ' : '') + I.title;
+  setColors(I.color || S.color, I.soft || S.soft);
+  const path = [S.folder, I.folder, U && U.folder].filter(Boolean).join(' / ');
+  $app.innerHTML = banner(S, I, U) + `<section class="blk"><div class="wrap" id="files">
+    <div class="docs">${'<div class="sk" style="height:250px"></div>'.repeat(4)}</div></div></section>`;
+  const key = keyOf(state);
+  load('files:' + key, 'getFiles', S.id, I.id, U ? U.id : null).then(r => {
+    if (keyOf(state) !== key) return;
+    const box = document.getElementById('files');
+    const files = (r.files || []).map(f => Object.assign({}, f, { kind: kind(f.mime) }));
+    if (!files.length) {
+      box.innerHTML = `<div class="empty"><b>아직 올라온 자료가 없어요</b>드라이브의 아래 폴더에 PDF, 사진, 영상을 넣으면 여기에 나타납니다.<br><code>행신중 연구학교 아카이브 / ${esc(path)}</code></div>`;
+      return;
+    }
+    const docs = files.filter(f => f.kind !== 'image' && f.kind !== 'video'), photos = files.filter(f => f.kind === 'image'), videos = files.filter(f => f.kind === 'video');
+    let html = '';
+    if (videos.length) {
+      html += `<div class="bar"><h2>영상</h2><span class="cnt">${videos.length}개</span></div><div class="docs">` +
+        videos.map((f, ix) => `<button class="doc" data-open="videos:${ix}">
+          <span class="thumb vt">${img(f, 640)}<span class="ic">${IC.play}</span><span class="badge">영상</span></span>
+          <span class="nm">${esc(stripExt(f.name))}</span><span class="dt">${ymd(f.updated)}</span></button>`).join('') + `</div>`;
+    }
+    if (docs.length) {
+      if (videos.length) html += '<div style="height:44px"></div>';
+      html += `<div class="bar"><h2>자료</h2><span class="cnt">${docs.length}개</span></div><div class="docs">` +
+        docs.map((f, ix) => `<button class="doc" data-open="docs:${ix}">
+          <span class="thumb">${f.kind === 'pdf' || f.kind === 'slides' || f.kind === 'doc' ? img(f, 480) : ''}<span class="ic">${IC.doc}</span><span class="badge">${KLABEL[f.kind]}</span></span>
+          <span class="nm">${esc(stripExt(f.name))}</span><span class="dt">${ymd(f.updated)}</span></button>`).join('') + `</div>`;
+    }
+    if (photos.length) {
+      html += `<div class="bar" style="margin-top:${docs.length || videos.length ? 44 : 0}px"><h2>사진</h2><span class="cnt">${photos.length}장</span></div><div class="photos">` +
+        photos.map((f, ix) => `<button class="ph" data-open="photos:${ix}" aria-label="${esc(f.name)}">${img(f, 480) || `<span class="ic" style="color:var(--c);opacity:.6">${IC.img}</span>`}</button>`).join('') + `</div>`;
+    }
+    box.innerHTML = html;
+    box.onclick = e => {
+      const b = e.target.closest('[data-open]'); if (!b) return;
+      const [g, ix] = b.dataset.open.split(':');
+      openViewer(g === 'docs' ? docs : g === 'videos' ? videos : photos, Number(ix), b);
+    };
+  }).catch(err => {
+    document.getElementById('files').innerHTML = `<div class="err">자료를 불러오지 못했어요. 잠시 뒤 새로고침해 주세요.<br><small>${esc(err && err.message || err)}</small></div>`;
+  });
+}
+function img(f, w) {
+  const u = thumbUrl(f, w);
+  return u ? `<img src="${u}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()" style="position:absolute;inset:0">` : '';
+}
+
+/* ---------- 미리보기 창 ---------- */
+function openViewer(list, ix, from) {
+  viewerList = list; viewerIx = ix; lastFocus = from;
+  $viewer.hidden = false; document.body.style.overflow = 'hidden';
+  drawViewer();
+  $viewer.querySelector('[data-v="close"]').focus();
+}
+function drawViewer() {
+  const f = viewerList[viewerIx], n = viewerList.length;
+  let stage;
+  const what = f.kind === 'image' ? '사진이 크게 열립니다' : f.kind === 'video' ? '영상이 재생됩니다' : 'PDF가 바로 열립니다';
+  if (!LIVE) stage = `<div class="mock">${f.kind === 'image' ? IC.img : f.kind === 'video' ? IC.play : IC.doc}<b style="color:var(--ink)">${esc(f.name)}</b>실제 웹앱에서는 여기에 ${what}.</div>`;
+  else if (f.kind === 'image') stage = `<img src="${thumbUrl(f, 2000)}" alt="${esc(f.name)}" referrerpolicy="no-referrer">`;
+  else stage = `<iframe src="${previewUrl(f)}" title="${esc(f.name)}" allow="autoplay" allowfullscreen></iframe>`;
+  $viewer.innerHTML = `
+    <div class="vh"><span class="nm">${esc(f.name)}</span><span class="ix">${viewerIx + 1} / ${n}</span>
+      <a class="ib" href="${esc(f.url || '#')}" target="_blank" rel="noopener">${IC.ext}<span>새 창</span></a>
+      <button class="ib" data-v="close" aria-label="닫기">${IC.close}</button></div>
+    <div class="vb">
+      <button class="ib side" data-v="prev" aria-label="이전" ${viewerIx === 0 ? 'disabled' : ''}>${IC.prev}</button>
+      <div class="stage">${stage}</div>
+      <button class="ib side" data-v="next" aria-label="다음" ${viewerIx === n - 1 ? 'disabled' : ''}>${IC.next}</button>
+    </div>`;
+}
+function closeViewer(silent) {
+  if ($viewer.hidden) return;
+  $viewer.hidden = true; $viewer.innerHTML = ''; document.body.style.overflow = '';
+  if (!silent && lastFocus) lastFocus.focus();
+}
+function step(d) { const k = viewerIx + d; if (k < 0 || k >= viewerList.length) return; viewerIx = k; drawViewer(); }
+$viewer.addEventListener('click', e => {
+  const b = e.target.closest('[data-v]');
+  if (b) { const v = b.dataset.v; if (v === 'close') closeViewer(); if (v === 'prev') step(-1); if (v === 'next') step(1); return; }
+  if (e.target === $viewer || e.target.classList.contains('vb')) closeViewer();
+});
+document.addEventListener('keydown', e => {
+  if ($viewer.hidden) return;
+  if (e.key === 'Escape') closeViewer();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+
+/* ---------- 시작 ---------- */
+if (!LIVE) {
+  const d = document.getElementById('demo');
+  if (!DEMO) d.textContent = '지금은 파일을 직접 연 상태라 자료를 불러올 수 없어요. 앱스 스크립트에서 [배포]한 웹 앱 주소(…/exec)로 열어 주세요.';
+  d.hidden = false;
+}
+if (IS_GAS && google.script.history) {
+  google.script.history.setChangeHandler(e => go(e.state || parse(e.location && e.location.parameter && e.location.parameter.page), false));
+} else {
+  window.addEventListener('popstate', e => go(e.state || { s: 'home' }, false));
+}
+let startKey = START;
+if (!IS_GAS) { try { startKey = new URLSearchParams(location.search).get('page') || START; } catch (e) {} }
+state = parse(startKey);
+if (IS_GAS && google.script.url) {
+  google.script.url.getLocation(function (loc) {
+    const pg = loc && loc.parameter && loc.parameter.page;
+    if (pg && pg !== 'home') go(parse(pg), false);
+  });
+}
+try { if (!IS_GAS) history.replaceState(state, ''); } catch (e) {}
+render();
+</script>
+</body>
+</html>
